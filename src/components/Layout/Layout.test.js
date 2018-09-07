@@ -25,7 +25,6 @@ describe('Layout', () => {
         <App
           context={{
             insertCss: () => {},
-            // fetch: () => {},
             pathname: '',
             client,
           }}
