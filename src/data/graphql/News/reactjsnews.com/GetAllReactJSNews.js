@@ -5,7 +5,7 @@ export const schema = [
   # A single news article from [https://reactjsnews.com/](https://reactjsnews.com/)
   type ReactJSNewsItem {
     # The news item's title
-    title: String
+    title: String @auth(requires: USER)
 
     # A direct link URL to this news item on reactjsnews.com
     link: String

@@ -25,7 +25,12 @@ import {
 import {
   schema as RestDirectiveSchema,
   schemaDirectives as RestDirectiveSchemaDirectives,
-} from './directives/x';
+} from './directives/rest';
+
+import {
+  schema as AuthDirectiveSchema,
+  schemaDirectives as AuthDirectiveSchemaDirectives,
+} from './directives/auth';
 
 const RootQuery = [
   `
@@ -41,6 +46,13 @@ const RootQuery = [
   type RootQuery {
     ${NewsQueries}
     ${DatabaseQueries}
+    todos: TODO @rest(url: "https://jsonplaceholder.typicode.com/todos/1")
+  }
+  type TODO {
+    userId: Int,
+    id: Int,
+    title: String,
+    completed: Boolean
   }
 `,
 ];
@@ -65,6 +77,7 @@ const Mutation = [
 const SchemaDirectives = [
   `
   ${RestDirectiveSchema}
+  ${AuthDirectiveSchema}
   `,
 ];
 
@@ -81,14 +94,16 @@ const SchemaDefinition = [
 // Put schema together into one array of schema strings
 const resolvers = merge(NewsResolvers, DatabaseResolvers);
 
-const schemaDirectives = merge(RestDirectiveSchemaDirectives);
+const schemaDirectives = merge(
+  RestDirectiveSchemaDirectives,
+  AuthDirectiveSchemaDirectives,
+);
 
 const typeDefs = [
   ...SchemaDefinition,
   ...SchemaDirectives,
   ...RootQuery,
   ...Mutation,
-
   ...NewsSchema,
   ...DatabaseSchema,
 ];

@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 const { SchemaDirectiveVisitor } = require('apollo-server');
 
 export const schema = `
@@ -7,7 +9,7 @@ export const schema = `
 class RestDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(field) {
     const { url } = this.args;
-    field.resolve = () => fetch(url);
+    field.resolve = () => fetch(url).then(res => res.json());
   }
 }
 
