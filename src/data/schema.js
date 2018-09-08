@@ -22,6 +22,11 @@ import {
   queries as DatabaseQueries,
 } from './graphql/Database/schema';
 
+import {
+  schema as RestDirectiveSchema,
+  schemaDirectives as RestDirectiveSchemaDirectives,
+} from './directives/x';
+
 const RootQuery = [
   `
   # # React-Starter-Kit Querying API
@@ -57,6 +62,12 @@ const Mutation = [
 `,
 ];
 
+const SchemaDirectives = [
+  `
+  ${RestDirectiveSchema}
+  `,
+];
+
 const SchemaDefinition = [
   `
   schema {
@@ -70,8 +81,11 @@ const SchemaDefinition = [
 // Put schema together into one array of schema strings
 const resolvers = merge(NewsResolvers, DatabaseResolvers);
 
-const schema = [
+const schemaDirectives = merge(RestDirectiveSchemaDirectives);
+
+const typeDefs = [
   ...SchemaDefinition,
+  ...SchemaDirectives,
   ...RootQuery,
   ...Mutation,
 
@@ -80,7 +94,8 @@ const schema = [
 ];
 
 export default {
-  typeDefs: schema,
+  typeDefs,
   resolvers,
+  schemaDirectives,
   ...(__DEV__ ? { log: e => console.error(e.stack) } : {}),
 };
