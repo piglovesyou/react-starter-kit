@@ -32,6 +32,11 @@ import {
   schemaDirectives as AuthDirectiveSchemaDirectives,
 } from './directives/auth';
 
+import {
+  schema as TimestampSchema,
+  resolvers as TimestampResolvers,
+} from './graphql/Scalar/Timestamp';
+
 const RootQuery = [
   `
   # # React-Starter-Kit Querying API
@@ -92,7 +97,7 @@ const SchemaDefinition = [
 
 // Merge all of the resolver objects together
 // Put schema together into one array of schema strings
-const resolvers = merge(NewsResolvers, DatabaseResolvers);
+const resolvers = merge(NewsResolvers, DatabaseResolvers, TimestampResolvers);
 
 const schemaDirectives = merge(
   RestDirectiveSchemaDirectives,
@@ -102,6 +107,7 @@ const schemaDirectives = merge(
 const typeDefs = [
   ...SchemaDefinition,
   ...SchemaDirectives,
+  ...TimestampSchema,
   ...RootQuery,
   ...Mutation,
   ...NewsSchema,
