@@ -33,6 +33,11 @@ import {
 } from './directives/auth';
 
 import {
+  schema as ConcatDirectiveSchema,
+  schemaDirectives as ConcatDirectiveSchemaDirectives,
+} from './directives/concat';
+
+import {
   schema as TimestampSchema,
   resolvers as TimestampResolvers,
 } from './graphql/Scalar/Timestamp';
@@ -48,10 +53,23 @@ const RootQuery = [
   # 1. Use the GraphQL schema language to [generate a schema](https://www.apollographql.com/docs/graphql-tools/generate-schema.html) with full support for resolvers, interfaces, unions, and custom scalars. The schema produced is completely compatible with [GraphQL.js](https://github.com/graphql/graphql-js).
   # 2. [Mock your GraphQL API](https://www.apollographql.com/docs/graphql-tools/mocking.html) with fine-grained per-type mocking
   # 3. Automatically [stitch multiple schemas together](https://www.apollographql.com/docs/graphql-tools/schema-stitching.html) into one larger API
+  
+  type Issue {
+    id: String
+    url: String
+  }
+  
   type RootQuery {
     ${NewsQueries}
     ${DatabaseQueries}
     todos: TODO @rest(url: "https://jsonplaceholder.typicode.com/todos/1")
+    
+    ghissues: [Issue] @concat(urls: [
+      "https://api.github.com/repos/apollographql/apollo-link/issues",
+      "https://api.github.com/repos/apollographql/apollo-client/issues",
+      "https://api.github.com/repos/apollographql/apollo-server/issues",
+    ])
+    
   }
   type TODO {
     userId: Int,
@@ -83,6 +101,7 @@ const SchemaDirectives = [
   `
   ${RestDirectiveSchema}
   ${AuthDirectiveSchema}
+  ${ConcatDirectiveSchema}
   `,
 ];
 
@@ -102,6 +121,7 @@ const resolvers = merge(NewsResolvers, DatabaseResolvers, TimestampResolvers);
 const schemaDirectives = merge(
   RestDirectiveSchemaDirectives,
   AuthDirectiveSchemaDirectives,
+  ConcatDirectiveSchemaDirectives,
 );
 
 const typeDefs = [
