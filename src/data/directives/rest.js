@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 import fetch from 'node-fetch';
 
 const { SchemaDirectiveVisitor } = require('apollo-server');

@@ -1,6 +1,12 @@
+/* eslint-disable no-underscore-dangle, no-param-reassign, class-methods-use-this, func-names, no-unused-vars */
+
 // @flow
 
-const { SchemaDirectiveVisitor } = require('apollo-server');
+import { SchemaDirectiveVisitor } from 'apollo-server';
+
+function getUser(token) {
+  return {};
+}
 
 export const schema = `
   directive @auth(
