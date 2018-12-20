@@ -1,7 +1,5 @@
 /* eslint-disable no-underscore-dangle, no-param-reassign, class-methods-use-this, func-names, no-unused-vars */
 
-// @flow
-
 import { SchemaDirectiveVisitor } from 'apollo-server';
 
 function getUser(token) {
