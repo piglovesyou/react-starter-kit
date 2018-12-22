@@ -1,0 +1,20 @@
+{
+  "data": {
+    "ghissues": [
+      {
+        "id": "393044392",
+        "url": "https://api.github.com/repos/apollographql/apollo-link/issues/897"
+      },
+      // ...
+      {
+        "id": "392713767",
+        "url": "https://api.github.com/repos/apollographql/apollo-client/issues/4252"
+      },
+      // ...
+      {
+        "id": "386114424",
+        "url": "https://api.github.com/repos/apollographql/apollo-server/issues/2051"
+      }
+    ]
+  }
+}

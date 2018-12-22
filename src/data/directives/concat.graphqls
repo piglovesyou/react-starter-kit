@@ -1,0 +1,34 @@
+# .graphql
+directive @concat(urls: [String]) on FIELD_DEFINITION
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+
+# .graphql
+type Issue {
+  id: String
+  url: String
+}
+
+type RootQuery {
+  # ...
+  ghissues: [Issue] @concat(urls: [
+    "https://api.github.com/repos/apollographql/apollo-link/issues",
+    "https://api.github.com/repos/apollographql/apollo-client/issues",
+    "https://api.github.com/repos/apollographql/apollo-server/issues",
+  ])
+}
+
+type Mutation {
+
+}
+
+# .graphql
+query {
+  ghissues {
+    id
+    url
+  }
+}
