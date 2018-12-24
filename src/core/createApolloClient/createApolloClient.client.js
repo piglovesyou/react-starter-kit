@@ -3,7 +3,7 @@
 import { ApolloClient } from 'apollo-client';
 import { from } from 'apollo-link';
 import { onError } from 'apollo-link-error';
-import { HttpLink } from 'apollo-link-http';
+import { BatchHttpLink } from 'apollo-link-batch-http';
 import apolloLogger from 'apollo-link-logger';
 import { withClientState } from 'apollo-link-state';
 import createCache from './createCache';
@@ -19,6 +19,7 @@ export default function createApolloClient() {
   });
 
   const link = from([
+    // batchLink,
     stateLink,
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors)
@@ -30,9 +31,10 @@ export default function createApolloClient() {
       if (networkError) console.warn(`[Network error]: ${networkError}`);
     }),
     ...(__DEV__ ? [apolloLogger] : []),
-    new HttpLink({
+    new BatchHttpLink({
       uri: '/graphql',
       credentials: 'include',
+      batchInterval: 1000,
     }),
   ]);
 

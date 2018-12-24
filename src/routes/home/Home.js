@@ -7,12 +7,13 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import newsQuery from './news.graphql';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { compose, graphql, Mutation } from 'react-apollo';
 import s from './Home.css';
+import newsQuery from './news.graphql';
 
 class Home extends React.Component {
   static propTypes = {
@@ -39,24 +40,27 @@ class Home extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
+          <Mutation
+            mutation={gql`
+              mutation {
+                modify
+              }
+            `}
+          >
+            {(modify, { data }) => {
+              const { modify: modifiedData } = data || {};
+              return (
+                <>
+                  <button onClick={() => modify()}>MODIFY</button>
+                  {modifiedData && ` (Clicked ${modifiedData} times)`}
+                </>
+              );
+            }}
+          </Mutation>
           <p className={s.networkStatusMessage}>
             {isConnected ? 'Online' : 'Offline'}
           </p>
           <h1>React.js News</h1>
-          {loading
-            ? 'Loading...'
-            : reactjsGetAllNews.map(item => (
-                <article key={item.link} className={s.newsItem}>
-                  <h1 className={s.newsTitle}>
-                    <a href={item.link}>{item.title}</a>
-                  </h1>
-                  <div
-                    className={s.newsDesc}
-                    // eslint-disable-next-line react/no-danger
-                    dangerouslySetInnerHTML={{ __html: item.content }}
-                  />
-                </article>
-              ))}
         </div>
       </div>
     );

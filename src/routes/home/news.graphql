@@ -1,10 +1,4 @@
 query HomeNews {
-  reactjsGetAllNews {
-    title
-    link
-    content
-  }
-
   networkStatus @client {
     isConnected
   }

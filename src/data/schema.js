@@ -75,6 +75,8 @@ const Mutation = [
   # 3. Automatically [stitch multiple schemas together](https://www.apollographql.com/docs/graphql-tools/schema-stitching.html) into one larger API
   type Mutation {
     ${DatabaseMutations}
+    
+    modify: String
   }
 `,
 ];
@@ -97,7 +99,15 @@ const SchemaDefinition = [
 
 // Merge all of the resolver objects together
 // Put schema together into one array of schema strings
-const resolvers = merge(NewsResolvers, DatabaseResolvers, TimestampResolvers);
+let i = 0;
+const resolvers = merge(NewsResolvers, DatabaseResolvers, TimestampResolvers, {
+  Mutation: {
+    async modify() {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      return String(++i);
+    },
+  },
+});
 
 const schemaDirectives = merge(
   RestDirectiveSchemaDirectives,
