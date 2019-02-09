@@ -1,7 +1,7 @@
 // @flow
 
 import { ApolloClient } from 'apollo-client';
-import { from } from 'apollo-link';
+import { from, ApolloLink } from 'apollo-link';
 import { onError } from 'apollo-link-error';
 import { BatchHttpLink } from 'apollo-link-batch-http';
 import apolloLogger from 'apollo-link-logger';
