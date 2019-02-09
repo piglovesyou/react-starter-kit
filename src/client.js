@@ -170,7 +170,9 @@ function onNetworkStatusChange() {
   apolloClient.mutate({
     mutation: gql`
       mutation updateNetworkStatus($isConnected: Boolean) {
-        updateNetworkStatus(isConnected: $isConnected) @client {}
+        updateNetworkStatus(isConnected: $isConnected) @client {
+          isConnected
+        }
       }
     `,
     variables: {

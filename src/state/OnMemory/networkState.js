@@ -36,6 +36,6 @@ export const queries = [
 
 export const mutations = [
   `
-  updateNetworkStatus: NetworkStatus
+  updateNetworkStatus(isConnected: Boolean): NetworkStatus
 `,
 ];
