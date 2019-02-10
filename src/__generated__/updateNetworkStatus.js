@@ -8,11 +8,11 @@
 
 export type updateNetworkStatus_updateNetworkStatus = {
   __typename: "NetworkStatus",
-  isConnected: ?boolean,
+  isConnected: boolean,
 };
 
 export type updateNetworkStatus = {
-  updateNetworkStatus: ?updateNetworkStatus_updateNetworkStatus
+  updateNetworkStatus: updateNetworkStatus_updateNetworkStatus
 };
 
 export type updateNetworkStatusVariables = {

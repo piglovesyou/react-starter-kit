@@ -5,19 +5,19 @@ export const schema = [
   # A single news article from [https://reactjsnews.com/](https://reactjsnews.com/)
   type ReactJSNewsItem {
     # The news item's title
-    title: String
+    title: string
 
     # A direct link URL to this news item on reactjsnews.com
-    link: String
+    link: string
 
     # The name of the news item's author
-    author: String
+    author: string
 
     # The date this news item was published
-    pubDate: String
+    pubDate: string
 
     # News article in HTML format
-    content: String
+    content: string
   }
 `,
 ];
@@ -25,7 +25,7 @@ export const schema = [
 export const queries = [
   `
   # Retrieves the latest ReactJS News
-  reactjsGetAllNews: [ReactJSNewsItem]
+  reactjsGetAllNews: [ReactJSNewsItem!]!
 `,
 ];
 

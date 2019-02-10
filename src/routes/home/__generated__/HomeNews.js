@@ -11,28 +11,28 @@ export type HomeNews_reactjsGetAllNews = {
   /**
    * The news item's title
    */
-  title: ?string,
+  title: string,
   /**
    * A direct link URL to this news item on reactjsnews.com
    */
-  link: ?string,
+  link: string,
   /**
    * News article in HTML format
    */
-  content: ?string,
+  content: string,
 };
 
 export type HomeNews_networkStatus = {
   __typename: "NetworkStatus",
-  isConnected: ?boolean,
+  isConnected: boolean,
 };
 
 export type HomeNews = {
   /**
    * Retrieves the latest ReactJS News
    */
-  reactjsGetAllNews: ?Array<?HomeNews_reactjsGetAllNews>,
-  networkStatus: ?HomeNews_networkStatus,
+  reactjsGetAllNews: Array<HomeNews_reactjsGetAllNews>,
+  networkStatus: HomeNews_networkStatus,
 };
 
 /* @flow */

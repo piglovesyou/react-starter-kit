@@ -23,19 +23,19 @@ export const resolvers = {
 export const schema = [
   `
   type NetworkStatus {
-    isConnected: Boolean
+    isConnected: boolean
   }
 `,
 ];
 
 export const queries = [
   `
-  networkStatus: NetworkStatus
+  networkStatus: NetworkStatus!
 `,
 ];
 
 export const mutations = [
   `
-  updateNetworkStatus(isConnected: Boolean): NetworkStatus
+  updateNetworkStatus(isConnected: Boolean): NetworkStatus!
 `,
 ];
