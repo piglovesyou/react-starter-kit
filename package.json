@@ -164,6 +164,7 @@
     "fix": "yarn run fix-js && yarn run fix-css",
     "flow": "flow",
     "flow:check": "flow check",
+    "codegen": "apollo client:codegen --target flow",
     "test": "jest",
     "test-watch": "yarn run test --watch --notify",
     "test-cover": "yarn run test --coverage",
