@@ -23,7 +23,7 @@ export const resolvers = {
 export const schema = [
   `
   type NetworkStatus {
-    isConnected: boolean
+    isConnected: Boolean!
   }
 `,
 ];
