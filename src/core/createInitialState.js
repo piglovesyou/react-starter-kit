@@ -1,6 +1,6 @@
 // @flow
 
-import { defaults } from '../data/graphql/OnMemoryState/schema';
+import { defaults } from '../data/graphql/OnMemoryStatus/schema';
 
 export default function createInitialState(data: Object) {
   return {

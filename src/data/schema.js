@@ -31,7 +31,7 @@ import {
   schema as OnMemoryStateSchema,
   queries as OnMemoryStateQueries,
   mutations as OnMemoryStateMutations,
-} from './graphql/OnMemoryState/schema';
+} from './graphql/OnMemoryStatus/schema';
 
 const RootQuery = [
   `
