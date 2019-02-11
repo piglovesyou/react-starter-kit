@@ -165,6 +165,7 @@
     "flow": "flow",
     "flow:check": "flow check",
     "codegen": "apollo client:codegen --target flow",
+    "codegen:standalone": "babel-node tools/run codegenStandalone",
     "test": "jest",
     "test-watch": "yarn run test --watch --notify",
     "test-cover": "yarn run test --coverage",
