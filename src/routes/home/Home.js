@@ -10,7 +10,6 @@
 // @flow
 
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import type { OperationComponent } from 'react-apollo';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
