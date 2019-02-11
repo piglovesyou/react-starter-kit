@@ -28,10 +28,10 @@ import {
 } from './graphql/Scalar/Timestamp';
 
 import {
-  schema as NetworkStateSchema,
-  queries as NetworkStatusQueries,
-  mutations as NetworkStatusMutations,
-} from '../state/OnMemory/networkState';
+  schema as OnMemoryStateSchema,
+  queries as OnMemoryStateQueries,
+  mutations as OnMemoryStateMutations,
+} from './graphql/OnMemoryState/schema';
 
 const RootQuery = [
   `
@@ -48,7 +48,7 @@ const RootQuery = [
   type RootQuery {
     ${NewsQueries}
     ${DatabaseQueries}
-    ${NetworkStatusQueries}
+    ${OnMemoryStateQueries}
   }
 `,
 ];
@@ -66,7 +66,7 @@ const Mutation = [
   # 3. Automatically [stitch multiple schemas together](https://www.apollographql.com/docs/graphql-tools/schema-stitching.html) into one larger API
   type Mutation {
     ${DatabaseMutations}
-    ${NetworkStatusMutations}
+    ${OnMemoryStateMutations}
   }
 `,
 ];
@@ -93,7 +93,7 @@ const schema = [
 
   ...NewsSchema,
   ...DatabaseSchema,
-  ...NetworkStateSchema,
+  ...OnMemoryStateSchema,
 ];
 
 export default {
