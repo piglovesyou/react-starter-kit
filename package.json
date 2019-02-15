@@ -156,7 +156,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "lint-js": "eslint --ignore-path .gitignore --ignore-pattern \"/flow-typed/*\" --ignore-pattern \"**/__generated__/*\" --ignore-pattern \"!**/.*\" .",
+    "lint-js": "eslint --ignore-path .gitignore --ignore-pattern \"/flow-typed/*\" --ignore-pattern \"!**/.*\" .",
     "lint-css": "stylelint \"src/**/*.{css,less,styl,scss,sass,sss}\"",
     "lint": "yarn run lint-js && yarn run lint-css",
     "fix-js": "yarn run lint-js --fix",
