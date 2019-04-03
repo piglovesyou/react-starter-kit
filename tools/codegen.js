@@ -32,7 +32,7 @@ export default async function codegen() {
   const server = new ApolloServer(builtSchema);
   const { server: httpServer } = await server.listen({ port: codegenPort });
 
-  await spawn('yarn', ['apollo', 'client:codegen', '--target', 'flow'], {
+  await spawn('yarn', ['apollo', 'client:codegen', '--target', 'typescript'], {
     stdio: 'inherit',
   });
 

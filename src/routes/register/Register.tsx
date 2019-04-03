@@ -7,23 +7,22 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-
+// @flow
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import s from './Page.css';
+import s from './Register.css';
 
-type PropTypes = {| title: string, html: string |};
+interface PropTypes {
+  title: string;
+}
 
-const Page = ({ title, html }: PropTypes) => (
+const Register = (props: PropTypes) => (
   <div className={s.root}>
     <div className={s.container}>
-      <h1>{title}</h1>
-      <div
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      <h1>{props.title}</h1>
+      <p>...</p>
     </div>
   </div>
 );
 
-export default withStyles(s)(Page);
+export default withStyles(s)(Register);

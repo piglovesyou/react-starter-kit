@@ -9,13 +9,11 @@
 
 
 /* eslint-env jest */
-/* eslint-disable padded-blocks, no-unused-expressions */
-
-import React from 'react';
+/* eslint-disable padded-blocks, no-unused-expressions */ import React from 'react';
 import renderer from 'react-test-renderer';
-import createApolloClient from '../../core/createApolloClient';
-import App from '../App';
-import Layout from './Layout';
+import { createApolloClient } from '../../core/createApolloClient';
+import App  from '../App';
+import Layout  from './Layout';
 
 describe('Layout', () => {
   test('renders children correctly', () => {

@@ -7,12 +7,14 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './Page.css';
 
-type PropTypes = {| title: string, html: string |};
+interface PropTypes {
+  title: string;
+  html: string;
+}
 
 const Page = ({ title, html }: PropTypes) => (
   <div className={s.root}>
