@@ -21,3 +21,4 @@ declare module "isomorphic-style-loader/withStyles" {
   export default _default;
 }
 
+declare module "react-test-renderer"

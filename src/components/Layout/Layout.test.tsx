@@ -7,11 +7,12 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-
 /* eslint-env jest */
-/* eslint-disable padded-blocks, no-unused-expressions */ import React from 'react';
+/* eslint-disable padded-blocks, no-unused-expressions */
+
+import React from 'react';
 import renderer from 'react-test-renderer';
-import { createApolloClient } from '../../core/createApolloClient';
+import createApolloClient from '../../core/createApolloClient/createApolloClient.server';
 import App  from '../App';
 import Layout  from './Layout';
 

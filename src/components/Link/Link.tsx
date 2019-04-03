@@ -22,7 +22,7 @@ function isModifiedEvent(event: MouseEvent) {
 type PropTypes = {
   to: string,
   onClick?: Function,
-  children?: Node,
+  children?: ReactNode,
   className?: string,
 };
 

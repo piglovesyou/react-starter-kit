@@ -206,7 +206,7 @@ pe.skipNodeFiles();
 pe.skipPackage('express');
 
 // eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
+app.use((err: Error, req, res, next) => {
   console.error(pe.render(err));
   const html = ReactDOM.renderToStaticMarkup(
     <Html
