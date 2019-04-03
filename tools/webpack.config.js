@@ -284,6 +284,10 @@ const config = {
     ],
   },
 
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json'],
+  },
+
   // Don't attempt to continue if there are any errors.
   bail: !isDebug,
 
