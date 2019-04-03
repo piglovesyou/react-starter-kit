@@ -91,12 +91,12 @@ const config = {
                 debug: false,
               },
             ],
-            // Flow
-            // https://github.com/babel/babel/tree/master/packages/babel-preset-flow
-            '@babel/preset-flow',
             // JSX
             // https://github.com/babel/babel/tree/master/packages/babel-preset-react
             ['@babel/preset-react', { development: isDebug }],
+
+            // TypeScript
+            '@babel/preset-typescript',
           ],
           plugins: [
             // Experimental ECMAScript proposals
