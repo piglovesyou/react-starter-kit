@@ -8,8 +8,7 @@
  */
 
 
-import React from 'react';
-import type { Node } from 'react';
+import React, { ReactNode } from 'react';
 import history from '../../history';
 
 function isLeftClickEvent(event) {

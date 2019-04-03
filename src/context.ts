@@ -1,4 +1,3 @@
-// @flow
 import { createContext } from 'react';
 export interface AppContextTypes {
   pathname: string;

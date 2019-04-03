@@ -161,9 +161,10 @@ app.get('*', async (req, res, next) => {
 
     const data = { ...route };
     const rootComponent = (
-      <App context={context} client={apolloClient} insertCss={insertCss}>
-        {route.component}
-      </App>
+      <div>yeah</div>
+      // <App context={context} client={apolloClient} insertCss={insertCss}>
+      //   {route.component}
+      // </App>
     );
     await getDataFromTree(rootComponent);
     data.children = await ReactDOM.renderToString(rootComponent);
@@ -189,7 +190,7 @@ app.get('*', async (req, res, next) => {
       cache: apolloClient.extract(),
     };
 
-    const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
+    const html = ReactDOM.renderToStaticMarkup(<div>ohh</div>); // <Html {...data} />);
     res.status(route.status || 200);
     res.send(`<!doctype html>${html}`);
   } catch (err) {

@@ -1,5 +1,3 @@
-// @flow
-
 import { InMemoryCache, defaultDataIdFromObject } from 'apollo-cache-inmemory';
 
 function dataIdFromObject(obj) {
