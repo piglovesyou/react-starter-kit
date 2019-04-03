@@ -341,22 +341,22 @@ const clientConfig = {
       output: `${BUILD_DIR}/asset-manifest.json`,
       publicPath: true,
       writeToDisk: true,
-      customize: ({ key, value }) => {
+      customize: ({ key, value }: { key: string, value: string}) => {
         // You can prevent adding items to the manifest by returning false.
         if (key.toLowerCase().endsWith('.map')) return false;
         return { key, value };
       },
-      done: (manifest, stats) => {
+      done: (manifest: any, stats: any) => {
         // Write chunk-manifest.json.json
         const chunkFileName = `${BUILD_DIR}/chunk-manifest.json`;
         try {
-          const fileFilter = file => !file.endsWith('.map');
-          const addPath = file => manifest.getPublicPath(file);
-          const chunkFiles = stats.compilation.chunkGroups.reduce((acc, c) => {
+          const fileFilter = (file: string) => !file.endsWith('.map');
+          const addPath = (file: string) => manifest.getPublicPath(file);
+          const chunkFiles = stats.compilation.chunkGroups.reduce((acc: any[], c: any) => {
             acc[c.name] = [
               ...(acc[c.name] || []),
               ...c.chunks.reduce(
-                (files, cc) => [
+                (files: any[], cc: any) => [
                   ...files,
                   ...cc.files.filter(fileFilter).map(addPath),
                 ],
@@ -437,14 +437,14 @@ const serverConfig = {
   module: {
     ...config.module,
 
-    rules: overrideRules(config.module.rules, rule => {
+    rules: overrideRules(config.module.rules, (rule: any) => {
       // Override babel-preset-env configuration for Node.js
       if (rule.loader === 'babel-loader') {
         return {
           ...rule,
           options: {
             ...rule.options,
-            presets: rule.options.presets.map(preset =>
+            presets: rule.options.presets.map((preset: any) =>
               preset[0] !== '@babel/preset-env'
                 ? preset
                 : [

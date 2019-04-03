@@ -8,7 +8,7 @@
  */
 
 import path from 'path';
-import express from 'express';
+import express, {NextFunction, Request, Response} from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import expressJwt, { UnauthorizedError as Jwt401Error } from 'express-jwt';
@@ -42,7 +42,9 @@ process.on('unhandledRejection', (reason, p) => {
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
 // user agent is not known.
 // -----------------------------------------------------------------------------
+// @ts-ignore
 global.navigator = global.navigator || {};
+// @ts-ignore
 global.navigator.userAgent = global.navigator.userAgent || 'all';
 
 const app = express();
@@ -72,7 +74,7 @@ app.use(
   }),
 );
 // Error handler for express-jwt
-app.use((err, req, res, next) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   // eslint-disable-line no-unused-vars
   if (err instanceof Jwt401Error) {
     console.error('[express-jwt-error]', req.cookies.id_token);
@@ -116,7 +118,7 @@ const server = new ApolloServer({
   introspection: __DEV__,
   playground: __DEV__,
   debug: __DEV__,
-  context: ({ req }) => ({ req }),
+  context: ({ req }: { req: Request }) => ({ req }),
 });
 server.applyMiddleware({ app });
 
@@ -129,7 +131,7 @@ app.get('*', async (req, res, next) => {
 
     // Enables critical path CSS rendering
     // https://github.com/kriasoft/isomorphic-style-loader
-    const insertCss = (...styles) => {
+    const insertCss = (...styles: any[]) => {
       // eslint-disable-next-line no-underscore-dangle
       styles.forEach(style => css.add(style._getCss()));
     };
@@ -171,9 +173,9 @@ app.get('*', async (req, res, next) => {
     data.styles = [{ id: 'css', cssText: [...css].join('') }];
 
     const scripts = new Set();
-    const addChunk = chunk => {
+    const addChunk = (chunk: string) => {
       if (chunks[chunk]) {
-        chunks[chunk].forEach(asset => scripts.add(asset));
+        chunks[chunk].forEach((asset: any) => scripts.add(asset));
       } else if (__DEV__) {
         throw new Error(`Chunk with name '${chunk}' cannot be found`);
       }
@@ -206,10 +208,11 @@ pe.skipNodeFiles();
 pe.skipPackage('express');
 
 // eslint-disable-next-line no-unused-vars
-app.use((err: Error, req, res, next) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(pe.render(err));
   const html = ReactDOM.renderToStaticMarkup(
     <Html
+      app={{}}
       title="Internal Server Error"
       description={err.message}
       styles={[{ id: 'css', cssText: errorPageStyle._getCss() }]} // eslint-disable-line no-underscore-dangle
@@ -224,7 +227,8 @@ app.use((err: Error, req, res, next) => {
 //
 // Launch the server
 // -----------------------------------------------------------------------------
-const promise = models.sync().catch(err => console.error(err.stack));
+const promise = models.sync().catch((err: Error) => console.error(err.stack));
+// @ts-ignore
 if (!module.hot) {
   promise.then(() => {
     app.listen(config.port, () => {
@@ -236,8 +240,11 @@ if (!module.hot) {
 //
 // Hot Module Replacement
 // -----------------------------------------------------------------------------
+// @ts-ignore
 if (module.hot) {
+  // @ts-ignore
   app.hot = module.hot;
+  // @ts-ignore
   module.hot.accept('./router');
 }
 
