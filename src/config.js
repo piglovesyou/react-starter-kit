@@ -15,7 +15,7 @@ if (process.env.BROWSER) {
   );
 }
 
-module.exports = {
+export default {
   // Node.js app
   port: process.env.PORT || 3000,
 

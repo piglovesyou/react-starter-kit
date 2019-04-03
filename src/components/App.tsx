@@ -20,7 +20,13 @@ interface Props {
 }
 
 const App = ({ client, insertCss, context, children }: Props) => (
-  <div>boom</div>
+  // NOTE: If you need to add or modify header, footer etc. of the app,
+  // please do that inside the Layout component.
+  <ApolloProvider client={client}>
+    <AppContext.Provider value={context}>
+      <StyleContext.Provider value={{ insertCss }}>{children}</StyleContext.Provider>
+    </AppContext.Provider>
+  </ApolloProvider>
 );
 
 export default App;

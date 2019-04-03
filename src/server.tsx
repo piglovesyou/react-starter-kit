@@ -163,7 +163,7 @@ app.get('*', async (req, res, next) => {
     const data = { ...route };
     const rootComponent = (
       <App context={context} client={apolloClient} insertCss={insertCss}>
-        baa
+        {route.component}
       </App>
     );
     await getDataFromTree(rootComponent);
