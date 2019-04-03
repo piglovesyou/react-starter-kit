@@ -207,7 +207,8 @@ async function start() {
 
   // Load compiled src/server.js as a middleware
   // eslint-disable-next-line global-require, import/no-unresolved
-  app = require('../build/server').default;
+  const compiled = require('../build/server.js');
+  app = compiled.default;
   appPromiseIsResolved = true;
   appPromiseResolve();
 

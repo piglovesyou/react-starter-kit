@@ -11,17 +11,17 @@
 import React, { ReactNode } from 'react';
 import history from '../../history';
 
-function isLeftClickEvent(event) {
+function isLeftClickEvent(event: MouseEvent) {
   return event.button === 0;
 }
 
-function isModifiedEvent(event) {
+function isModifiedEvent(event: MouseEvent) {
   return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }
 
 type PropTypes = {
   to: string,
-  onClick?: Object => void,
+  onClick?: Function,
   children?: Node,
   className?: string,
 };

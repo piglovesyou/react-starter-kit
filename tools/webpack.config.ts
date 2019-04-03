@@ -27,7 +27,7 @@ const isVerbose = process.argv.includes('--verbose');
 const isAnalyze =
   process.argv.includes('--analyze') || process.argv.includes('--analyse');
 
-const reScript = /\.(js|jsx|mjs)$/;
+const reScript = /\.(ts|tsx|js|jsx|mjs)$/;
 const reGraphql = /\.(graphql|gql)$/;
 const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
 const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
@@ -417,7 +417,7 @@ const serverConfig = {
   target: 'node',
 
   entry: {
-    server: ['@babel/polyfill', './src/server.js'],
+    server: ['@babel/polyfill', './src/server'],
   },
 
   output: {

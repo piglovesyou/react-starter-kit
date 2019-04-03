@@ -28,6 +28,7 @@ import router from './router';
 import models from './data/models';
 import schema from './data/schema';
 // import assets from './asset-manifest.json'; // eslint-disable-line import/no-unresolved
+// @ts-ignore
 import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unresolved
 import config from './config';
 
@@ -161,10 +162,9 @@ app.get('*', async (req, res, next) => {
 
     const data = { ...route };
     const rootComponent = (
-      <div>yeah</div>
-      // <App context={context} client={apolloClient} insertCss={insertCss}>
-      //   {route.component}
-      // </App>
+      <App context={context} client={apolloClient} insertCss={insertCss}>
+        baa
+      </App>
     );
     await getDataFromTree(rootComponent);
     data.children = await ReactDOM.renderToString(rootComponent);
@@ -190,7 +190,7 @@ app.get('*', async (req, res, next) => {
       cache: apolloClient.extract(),
     };
 
-    const html = ReactDOM.renderToStaticMarkup(<div>ohh</div>); // <Html {...data} />);
+    const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
     res.status(route.status || 200);
     res.send(`<!doctype html>${html}`);
   } catch (err) {
