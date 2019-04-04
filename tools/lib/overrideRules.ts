@@ -7,8 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-function overrideRules(rules, patch) {
-  return rules.map(ruleToPatch => {
+function overrideRules(rules: any, patch: any) {
+  return rules.map((ruleToPatch: any) => {
     let rule = patch(ruleToPatch);
     if (rule.rules) {
       rule = { ...rule, rules: overrideRules(rule.rules, patch) };

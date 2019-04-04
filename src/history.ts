@@ -7,8 +7,11 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory , History} from 'history';
+
+const history = process.env.BROWSER && createBrowserHistory();
 
 // Navigation manager, e.g. history.push('/home')
 // https://github.com/mjackson/history
-export default process.env.BROWSER && createBrowserHistory();
+
+export default history as NonNullable<History>

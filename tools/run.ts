@@ -7,12 +7,12 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-export function format(time) {
+export function format(time: Date) {
   return time.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
 }
 
-function run(fn, options) {
-  const task = typeof fn.default === 'undefined' ? fn : fn.default;
+function run(task: (arg0: any) => Promise<any>, options?: any) {
+  // const task = typeof fn.default === 'undefined' ? fn : fn.default;
   const start = new Date();
   console.info(
     `[${format(start)}] Starting '${task.name}${

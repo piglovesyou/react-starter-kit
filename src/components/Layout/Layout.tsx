@@ -7,7 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, {ComponentType} from 'react';
 import { ReactNode }  from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 
@@ -22,10 +22,10 @@ interface PropTypes {
   children: Node;
 }
 
-const Layout = (props: PropTypes) => (
+const Layout: ComponentType<PropTypes> = ({children}) => (
   <div>
     <Header />
-    {props.children}
+    {children}
     <Feedback />
     <Footer />
   </div>

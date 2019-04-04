@@ -8,16 +8,16 @@
  */
 
 import React from 'react';
-import { graphql } from 'react-apollo';
-// import { OperationComponent } from 'react-apollo';
+import { graphql, ChildDataProps } from 'react-apollo';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import newsQuery from './news.graphql';
 import s from './Home.css';
-// import { HomeNews } from './__generated__/HomeNews';
+import { HomeNews } from './__generated__/HomeNews';
 
 // Note: There is a regression from flow-bin@0.89.0
 // which spoils OperationComponent declaration. Be careful.
-const withNews = graphql(newsQuery);
+type ChildProps = ChildDataProps<{}, HomeNews, {}>;
+const withNews  = graphql<{}, HomeNews, {}, ChildProps>(newsQuery);
 
 const Home = withNews((props) => {
   const {
@@ -33,7 +33,7 @@ const Home = withNews((props) => {
       <div className={s.container}>
         <p className={s.networkStatusMessage}>{isConnected ? 'Online' : 'Offline'}</p>
         <h1>React.js News</h1>
-        {loading
+        {loading || !reactjsGetAllNews
           ? 'Loading...'
           : reactjsGetAllNews.map((item: any) => (
               <article key={item.link} className={s.newsItem}>

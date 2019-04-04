@@ -7,6 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+import { DocumentNode } from 'graphql';
 import merge from 'lodash.merge';
 
 import {
@@ -97,7 +98,7 @@ const schema = [
 ];
 
 export default {
-  typeDefs: schema,
+  typeDefs: ((schema as any) as DocumentNode[]),
   resolvers,
-  ...(__DEV__ ? { log: e => console.error(e.stack) } : {}),
+  // ...(__DEV__ ? { log: e => console.error(e.stack) } : {}),
 };
