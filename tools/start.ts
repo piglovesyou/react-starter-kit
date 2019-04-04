@@ -8,15 +8,16 @@
  */
 
 import path from 'path';
-import express from 'express';
+import express, {Request, Response, Express} from 'express';
 import browserSync from 'browser-sync';
-import webpack from 'webpack';
+import webpack, {Compiler, Configuration, ICompiler} from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import webpackConfig from './webpack.config';
 import run, { format } from './run';
 import clean from './clean';
+import {Func} from "continuation-local-storage";
 
 const isDebug = !process.argv.includes('--release');
 
@@ -29,7 +30,7 @@ const watchOptions = {
   // ignored: /node_modules/,
 };
 
-function createCompilationPromise(name, compiler, config) {
+function createCompilationPromise(name: string, compiler: Compiler, config: Configuration) {
   return new Promise((resolve, reject) => {
     let timeStart = new Date();
     compiler.hooks.compile.tap(name, () => {
@@ -58,7 +59,7 @@ function createCompilationPromise(name, compiler, config) {
   });
 }
 
-let server;
+let server: Express;
 
 /**
  * Launches a development web server with "live reload" functionality -
@@ -71,10 +72,10 @@ async function start() {
   server.use(express.static(path.resolve(__dirname, '../public')));
 
   // Configure client-side hot module replacement
-  const clientConfig = webpackConfig.find(config => config.name === 'client');
+  const clientConfig = webpackConfig.find(config => config.name === 'client') as any;
   clientConfig.entry.client = ['./tools/lib/webpackHotDevClient']
     .concat(clientConfig.entry.client)
-    .sort((a, b) => b.includes('polyfill') - a.includes('polyfill'));
+    .sort((a: string, b: string) => Number(b.includes('polyfill')) - Number(a.includes('polyfill')));
   clientConfig.output.filename = clientConfig.output.filename.replace(
     'chunkhash',
     'hash',
@@ -84,29 +85,29 @@ async function start() {
     'hash',
   );
   clientConfig.module.rules = clientConfig.module.rules.filter(
-    x => x.loader !== 'null-loader',
+    (x: any) => x.loader !== 'null-loader',
   );
   clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
   // Configure server-side hot module replacement
-  const serverConfig = webpackConfig.find(config => config.name === 'server');
+  const serverConfig = webpackConfig.find(config => config.name === 'server') as any;
   serverConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json';
   serverConfig.output.hotUpdateChunkFilename =
     'updates/[id].[hash].hot-update.js';
   serverConfig.module.rules = serverConfig.module.rules.filter(
-    x => x.loader !== 'null-loader',
+    (x: any) => x.loader !== 'null-loader',
   );
   serverConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
   // Configure compilation
   await run(clean);
-  const multiCompiler = webpack(webpackConfig);
+  const multiCompiler = webpack(webpackConfig as Configuration[]);
   const clientCompiler = multiCompiler.compilers.find(
     compiler => compiler.name === 'client',
-  );
+  ) as Compiler;
   const serverCompiler = multiCompiler.compilers.find(
     compiler => compiler.name === 'server',
-  );
+  ) as Compiler;
   const clientPromise = createCompilationPromise(
     'client',
     clientCompiler,
@@ -130,8 +131,8 @@ async function start() {
   // https://github.com/glenjamin/webpack-hot-middleware
   server.use(webpackHotMiddleware(clientCompiler, { log: false }));
 
-  let appPromise;
-  let appPromiseResolve;
+  let appPromise: Promise<void>;
+  let appPromiseResolve: Function;
   let appPromiseIsResolved = true;
   serverCompiler.hooks.compile.tap('server', () => {
     if (!appPromiseIsResolved) return;
@@ -140,24 +141,28 @@ async function start() {
     appPromise = new Promise(resolve => (appPromiseResolve = resolve));
   });
 
-  let app;
-  server.use((req, res) => {
+  let app: Express;
+  server.use((req: Request, res: Response) => {
     appPromise
+      // @ts-ignore Use not documented method "handle"
       .then(() => app.handle(req, res))
       .catch(error => console.error(error));
   });
 
-  function checkForUpdate(fromUpdate) {
+  function checkForUpdate(fromUpdate?: boolean) {
     const hmrPrefix = '[\x1b[35mHMR\x1b[0m] ';
+    // @ts-ignore
     if (!app.hot) {
       throw new Error(`${hmrPrefix}Hot Module Replacement is disabled.`);
     }
+    // @ts-ignore
     if (app.hot.status() !== 'idle') {
       return Promise.resolve();
     }
+    // @ts-ignore
     return app.hot
       .check(true)
-      .then(updatedModules => {
+      .then((updatedModules: string[]) => {
         if (!updatedModules) {
           if (fromUpdate) {
             console.info(`${hmrPrefix}Update applied.`);
@@ -174,7 +179,8 @@ async function start() {
           checkForUpdate(true);
         }
       })
-      .catch(error => {
+      .catch((error: Error) => {
+        // @ts-ignore
         if (['abort', 'fail'].includes(app.hot.status())) {
           console.warn(`${hmrPrefix}Cannot apply update.`);
           delete require.cache[require.resolve('../build/server')];
@@ -210,7 +216,7 @@ async function start() {
   const compiled = require('../build/server.js');
   app = compiled.default;
   appPromiseIsResolved = true;
-  appPromiseResolve();
+  appPromiseResolve!();
 
   // Launch the development server with Browsersync and HMR
   await new Promise((resolve, reject) =>

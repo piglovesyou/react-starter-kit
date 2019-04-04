@@ -18,7 +18,7 @@ import overrideRules from './lib/overrideRules';
 import pkg from '../package.json';
 
 const ROOT_DIR = path.resolve(__dirname, '..');
-const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
+const resolvePath = (...args: string[]) => path.resolve(ROOT_DIR, ...args);
 const SRC_DIR = resolvePath('src');
 const BUILD_DIR = resolvePath('build');
 
@@ -55,7 +55,7 @@ const config = {
       ? '[name].chunk.js'
       : '[name].[chunkhash:8].chunk.js',
     // Point sourcemap entries to original disk location (format as URL on Windows)
-    devtoolModuleFilenameTemplate: info =>
+    devtoolModuleFilenameTemplate: (info: any) =>
       path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
 
@@ -146,13 +146,8 @@ const config = {
             options: {
               plugins: [
                 // CSS Nano options http://cssnano.co/
-                cssnano(
-                  isDebug
-                    ? false
-                    : {
-                        discardComments: { removeAll: true },
-                      },
-                ),
+                cssnano(),
+                // TODO: cssnano doesn't support comment discarding. Do it in somewhere else.
               ],
             },
           },
@@ -451,6 +446,7 @@ const serverConfig = {
                     '@babel/preset-env',
                     {
                       targets: {
+                        // @ts-ignore
                         node: pkg.engines.node.match(/(\d+\.?)+/)[0],
                       },
                       modules: false,
