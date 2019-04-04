@@ -7,8 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, {ComponentType} from 'react';
-import { ReactNode }  from 'react';
+import React, {FunctionComponent} from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 
 // external-global styles must be imported in your JS.
@@ -18,11 +17,9 @@ import Header  from '../Header';
 import Feedback  from '../Feedback';
 import Footer  from '../Footer';
 
-interface PropTypes {
-  children: Node;
-}
+interface PropTypes {}
 
-const Layout: ComponentType<PropTypes> = ({children}) => (
+const Layout: FunctionComponent<PropTypes> = ({children}) => (
   <div>
     <Header />
     {children}
