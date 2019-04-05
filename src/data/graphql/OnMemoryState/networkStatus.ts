@@ -7,7 +7,7 @@ export const defaults = {
 
 export const resolvers = {
   Mutation: {
-    updateNetworkStatus: (_, { isConnected }, { cache }) => {
+    updateNetworkStatus: (_: any, { isConnected }: any, { cache }: any) => {
       const data = {
         networkStatus: {
           __typename: 'NetworkStatus',

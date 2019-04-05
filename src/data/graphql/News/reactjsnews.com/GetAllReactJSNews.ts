@@ -34,9 +34,11 @@ const url =
   'https://api.rss2json.com/v1/api.json' +
   '?rss_url=https%3A%2F%2Freactjsnews.com%2Ffeed.xml';
 
-let items = [];
-let lastFetchTask;
-let lastFetchTime = new Date(1970, 0, 1);
+import {HomeNews_reactjsGetAllNews} from '../../../../routes/home/__generated__/HomeNews';
+
+let items: HomeNews_reactjsGetAllNews[] = [];
+let lastFetchTask: Promise<HomeNews_reactjsGetAllNews[]> | null;
+let lastFetchTime = Number(new Date(1970, 0, 1));
 
 export const resolvers = {
   RootQuery: {
@@ -45,8 +47,8 @@ export const resolvers = {
         return lastFetchTask;
       }
 
-      if (new Date() - lastFetchTime > 1000 * 60 * 10 /* 10 mins */) {
-        lastFetchTime = new Date();
+      if (Date.now() - lastFetchTime > 1000 * 60 * 10 /* 10 mins */) {
+        lastFetchTime = Date.now();
         lastFetchTask = fetch(url)
           .then(response => response.json())
           .then(data => {

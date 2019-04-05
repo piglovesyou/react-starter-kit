@@ -37,7 +37,7 @@ const Home = withNews(props => {
           {isConnected ? 'Online' : 'Offline'}
         </p>
         <h1>React.js News</h1>
-        {loading
+        {loading || !reactjsGetAllNews
           ? 'Loading...'
           : reactjsGetAllNews.map(item => (
               <article key={item.link} className={s.newsItem}>

@@ -10,7 +10,9 @@
 /* eslint-disable global-require */
 
 // The top-level (parent) route
-const routes = {
+import {Route} from "universal-router";
+
+const routes: Route = {
   path: '',
 
   // Keep in mind, routes are evaluated in order
@@ -51,7 +53,7 @@ const routes = {
     },
   ],
 
-  async action({ next }) {
+  async action({ next }: any) {
     // Execute each child route until one of them return the result
     const route = await next();
 
@@ -65,7 +67,7 @@ const routes = {
 
 // The error page is available by permanent url for development mode
 if (__DEV__) {
-  routes.children.unshift({
+  routes.children!.unshift({
     path: '/error',
     action: require('./error').default,
   });

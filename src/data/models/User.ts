@@ -7,11 +7,11 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import DataType from 'sequelize';
-import Model from '../sequelize';
+import DataType, {Model} from 'sequelize';
+import sequelize from '../sequelize';
 
-const User = Model.define(
-  'User',
+class User extends Model {}
+User.init(
   {
     id: {
       type: DataType.UUID,
@@ -30,6 +30,7 @@ const User = Model.define(
     },
   },
   {
+    sequelize,
     indexes: [{ fields: ['email'] }],
   },
 );

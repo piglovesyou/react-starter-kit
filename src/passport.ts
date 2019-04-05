@@ -50,7 +50,7 @@ passport.use(
           if (userLogin) {
             // There is already a Facebook account that belongs to you.
             // Sign in with that account or delete it, then link it with your current account.
-            done();
+            done(null);
           } else {
             const user = await User.create(
               {
@@ -73,7 +73,7 @@ passport.use(
                   { model: UserProfile, as: 'profile' },
                 ],
               },
-            );
+            ) as any;
             done(null, {
               id: user.id,
               email: user.email,
@@ -98,7 +98,7 @@ passport.use(
           } else {
             let user = await User.findOne({
               where: { email: profile._json.email },
-            });
+            }) as any;
             if (user) {
               // There is already an account using this email address. Sign in to
               // that account and link it with Facebook manually from Account Settings.
