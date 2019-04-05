@@ -12,13 +12,13 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import createApolloClient from '../../core/createApolloClient/createApolloClient.client';
+import createApolloClient from '../../core/createApolloClient/createApolloClient.server';
 import App  from '../App';
 import Layout  from './Layout';
 
 describe('Layout', () => {
   test('renders children correctly', () => {
-    const client = createApolloClient();
+    const client = createApolloClient({} as any, {} as any);
 
     const wrapper = renderer
       .create(
