@@ -106,6 +106,7 @@
     "@types/webpack-hot-middleware": "^2.16.5",
     "@types/webpack-node-externals": "^1.6.3",
     "@types/whatwg-fetch": "^0.0.33",
+    "@typescript-eslint/eslint-plugin": "^1.6.0",
     "apollo": "^2.6.2",
     "autoprefixer": "^9.5.0",
     "babel-core": "^7.0.0-bridge.0",

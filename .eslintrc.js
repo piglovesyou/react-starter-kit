@@ -10,7 +10,7 @@
 // ESLint configuration
 // http://eslint.org/docs/user-guide/configuring
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
 
   extends: [
     'airbnb',
@@ -19,7 +19,12 @@ module.exports = {
     'prettier/react',
   ],
 
-  plugins: ['css-modules', 'prettier'],
+  plugins: ['@typescript-eslint/eslint-plugin', 'css-modules', 'prettier'],
+
+  parserOptions: {
+    sourceType: 'module',
+    project: './tsconfig.json',
+  },
 
   globals: {
     __DEV__: true,
