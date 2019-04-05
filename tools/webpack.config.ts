@@ -16,6 +16,7 @@ import cssnano from 'cssnano';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import overrideRules from './lib/overrideRules';
 import pkg from '../package.json';
+import postcssConfig from './postcss.config';
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const resolvePath = (...args: string[]) => path.resolve(ROOT_DIR, ...args);
@@ -171,11 +172,7 @@ const config = {
           // Apply PostCSS plugins including autoprefixer
           {
             loader: 'postcss-loader',
-            options: {
-              config: {
-                path: './tools/postcss.config.js',
-              },
-            },
+            options: postcssConfig,
           },
 
           // Compile Less to CSS

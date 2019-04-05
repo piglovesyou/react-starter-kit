@@ -12,7 +12,7 @@
 const isDebug = !process.argv.includes('--release');
 const pkg = require('../package.json');
 
-module.exports = () => ({
+const config = {
   // The list of plugins for PostCSS
   // https://github.com/postcss/postcss
   plugins: [
@@ -69,8 +69,10 @@ module.exports = () => ({
       isDebug
         ? false
         : {
-            discardComments: { removeAll: true },
-          },
+          discardComments: {removeAll: true},
+        },
     ),
   ],
-});
+};
+
+export default config;
