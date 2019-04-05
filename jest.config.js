@@ -55,14 +55,7 @@ module.exports = {
 
   // The default extensions Jest will look for.
   // https://facebook.github.io/jest/docs/en/configuration.html#modulefileextensions-array-string
-  moduleFileExtensions: [
-    'ts',
-    'tsx',
-    'js',
-    'jsx',
-    'json',
-    'node',
-  ],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 
   // moduleDirectories: // [array<string>]
 

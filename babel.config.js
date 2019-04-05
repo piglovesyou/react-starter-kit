@@ -1,19 +1,19 @@
 module.exports = {
-  "presets": [
+  presets: [
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
-        "targets": {
-          "node": "current"
-        }
-      }
+        targets: {
+          node: 'current',
+        },
+      },
     ],
-    "@babel/preset-react",
-    "@babel/preset-typescript"
+    '@babel/preset-react',
+    '@babel/preset-typescript',
   ],
-  "plugins": [
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-syntax-dynamic-import"
+  plugins: [
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-syntax-dynamic-import',
   ],
-  "ignore": ["node_modules", "build"]
-}
+  ignore: ['node_modules', 'build'],
+};
