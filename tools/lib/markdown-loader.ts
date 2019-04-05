@@ -7,17 +7,18 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-const path = require('path');
-const fm = require('front-matter');
-const MarkdownIt = require('markdown-it');
+import webpack from 'webpack';
+import path from "path";
+import fm from "front-matter";
+import MarkdownIt from "markdown-it";
 
-module.exports = function markdownLoader(source) {
+module.exports = function markdownLoader(this: webpack.loader.LoaderContext, source: string) {
   const md = new MarkdownIt({
     html: true,
     linkify: true,
   });
 
-  const frontmatter = fm(source);
+  const frontmatter = fm<{key: string, html: string}>(source);
   frontmatter.attributes.key = path.basename(this.resourcePath, '.md');
   frontmatter.attributes.html = md.render(frontmatter.body);
 

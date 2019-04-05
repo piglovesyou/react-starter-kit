@@ -244,7 +244,7 @@ const config = {
       // Convert Markdown into HTML
       {
         test: /\.md$/,
-        loader: path.resolve(__dirname, './lib/markdown-loader.js'),
+        loader: path.resolve(__dirname, './lib/markdown-loader'),
       },
 
       // Return public URL for all assets unless explicitly excluded
@@ -281,6 +281,10 @@ const config = {
 
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
+  },
+
+  resolveLoader: {
+    extensions: ['.ts', '.js', '.json'],
   },
 
   // Don't attempt to continue if there are any errors.
@@ -412,7 +416,7 @@ const serverConfig = {
   target: 'node',
 
   entry: {
-    server: ['@babel/polyfill', './src/server'],
+    server: ['./src/server'],
   },
 
   output: {
