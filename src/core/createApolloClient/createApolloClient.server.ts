@@ -11,7 +11,7 @@ import {
   defaults as cacheDefaults,
 } from '../../data/graphql/OnMemoryState/schema';
 
-export default function createApolloClient(schema, partialCacheDefaults) {
+export default function createApolloClient(schema: SchemaLink.Options, partialCacheDefaults: Object) {
   const cache = createCache();
 
   cache.writeData({
@@ -32,6 +32,7 @@ export default function createApolloClient(schema, partialCacheDefaults) {
   ]);
 
   return new ApolloClient({
+    // @ts-ignore
     link,
     cache,
     typeDefs: gql(clientSchema),

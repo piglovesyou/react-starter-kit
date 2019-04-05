@@ -12,7 +12,7 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import createApolloClient from '../../core/createApolloClient/createApolloClient.server';
+import createApolloClient from '../../core/createApolloClient/createApolloClient.client';
 import App  from '../App';
 import Layout  from './Layout';
 

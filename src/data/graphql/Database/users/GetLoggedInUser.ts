@@ -9,7 +9,7 @@ export const queries = [
 
 export const resolvers = {
   RootQuery: {
-    async databaseGetLoggedInUser(parent, args, { req }) {
+    async databaseGetLoggedInUser(parent: any, args: any, { req }: any) {
       // Throw error if user is not authenticated
       if (!req.user) {
         return null;

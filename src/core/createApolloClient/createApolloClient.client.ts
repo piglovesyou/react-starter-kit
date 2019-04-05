@@ -32,6 +32,7 @@ export default function createApolloClient() {
   ]);
 
   return new ApolloClient({
+    // @ts-ignore
     link,
     cache,
     typeDefs: gql(clientSchema),

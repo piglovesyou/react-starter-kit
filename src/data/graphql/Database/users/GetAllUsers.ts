@@ -69,7 +69,7 @@ export const resolvers = {
       });
       return users;
     },
-    async databaseGetUser(parent, { email }) {
+    async databaseGetUser(parent: any, { email }: any) {
       const user = await User.findOne({
         where: { email },
         include: [

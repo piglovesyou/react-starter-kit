@@ -37,7 +37,7 @@ export const mutation = [
 
 export const resolvers = {
   Mutation: {
-    async databaseCreateUser(parent, args) {
+    async databaseCreateUser(parent: any, args: any) {
       // If user already exists, throw error
       const lookupUser = await User.findOne({ where: { email: args.email } });
 

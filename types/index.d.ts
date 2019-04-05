@@ -30,6 +30,7 @@ declare module "react-test-renderer"
 
 interface Window {
   ga: any;
+  App: any;
 }
 interface NodeModule {
   hot: any;
