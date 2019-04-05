@@ -8,22 +8,31 @@
  */
 
 // @flow
+
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './Login.css';
 
-interface PropTypes {
-  title: string;
-}
+type PropTypes = {
+  title: string,
+};
 
 const Login = (props: PropTypes) => (
   <div className={s.root}>
     <div className={s.container}>
       <h1>{props.title}</h1>
-      <p className={s.lead}>Log in with your username or company email address.</p>
+      <p className={s.lead}>
+        Log in with your username or company email address.
+      </p>
       <div className={s.formGroup}>
         <a className={s.facebook} href="/login/facebook">
-          <svg className={s.icon} width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            className={s.icon}
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path d="M22 16l1-5h-5V7c0-1.544.784-2 3-2h2V0h-4c-4.072 0-7 2.435-7 7v4H7v5h5v14h6V16h4z" />
           </svg>
           <span>Log in with Facebook</span>
@@ -31,7 +40,13 @@ const Login = (props: PropTypes) => (
       </div>
       <div className={s.formGroup}>
         <a className={s.google} href="/login/google">
-          <svg className={s.icon} width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            className={s.icon}
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d={
                 'M30 13h-4V9h-2v4h-4v2h4v4h2v-4h4m-15 2s-2-1.15-2-2c0 0-.5-1.828 1-3 ' +
@@ -50,7 +65,13 @@ const Login = (props: PropTypes) => (
       </div>
       <div className={s.formGroup}>
         <a className={s.twitter} href="/login/twitter">
-          <svg className={s.icon} width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            className={s.icon}
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d={
                 'M30 6.708c-1.105.49-2.756 1.143-4 1.292 1.273-.762 2.54-2.56 ' +
@@ -83,7 +104,12 @@ const Login = (props: PropTypes) => (
         <div className={s.formGroup}>
           <label className={s.label} htmlFor="password">
             Password:
-            <input className={s.input} id="password" type="password" name="password" />
+            <input
+              className={s.input}
+              id="password"
+              type="password"
+              name="password"
+            />
           </label>
         </div>
         <div className={s.formGroup}>

@@ -8,13 +8,14 @@
  */
 
 // @flow
+
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './Contact.css';
 
-interface PropTypes {
-  title: string;
-}
+type PropTypes = {
+  title: string,
+};
 
 const Contact = (props: PropTypes) => (
   <div className={s.root}>

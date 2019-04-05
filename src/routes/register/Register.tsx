@@ -8,13 +8,14 @@
  */
 
 // @flow
+
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './Register.css';
 
-interface PropTypes {
-  title: string;
-}
+type PropTypes = {
+  title: string,
+};
 
 const Register = (props: PropTypes) => (
   <div className={s.root}>

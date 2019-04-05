@@ -8,23 +8,25 @@
  */
 
 import 'whatwg-fetch';
-import React from 'react';
+import React, {ComponentElement, ReactComponentElement, ReactElement} from 'react';
 import ReactDOM from 'react-dom';
 import deepForceUpdate from 'react-deep-force-update';
 import queryString from 'query-string';
 import gql from 'graphql-tag';
 import { createPath } from 'history';
 import App from './components/App';
+import {Location} from "history";
 import history from './history';
 import { updateMeta } from './DOMUtils';
-import createApolloClient from './core/createApolloClient';
+import createApolloClient from './core/createApolloClient/createApolloClient.client';
 import router from './router';
+import {AppContextTypes} from "./context";
 
 const apolloClient = createApolloClient();
 
 // Enables critical path CSS rendering
 // https://github.com/kriasoft/isomorphic-style-loader
-const insertCss = (...styles) => {
+const insertCss = (...styles: any[]) => {
   // eslint-disable-next-line no-underscore-dangle
   const removeCss = styles.map(x => x._insertCss());
   return () => {
@@ -34,24 +36,24 @@ const insertCss = (...styles) => {
 
 // Global (context) variables that can be easily accessed from any React component
 // https://facebook.github.io/react/docs/context.html
-const context = {};
+const context: AppContextTypes = { pathname: '' };
 
 const container = document.getElementById('app');
 let currentLocation = history.location;
-let appInstance;
+let appInstance: typeof App | void;
 
-const scrollPositionsHistory = {};
+const scrollPositionsHistory: {[key: string]: {scrollX: number, scrollY: number}} = {};
 
 // Re-render the app when window.location changes
-async function onLocationChange(location, action) {
+async function onLocationChange(location: Location, action?: any) {
   // Remember the latest scroll position for the previous location
-  scrollPositionsHistory[currentLocation.key] = {
+  scrollPositionsHistory[currentLocation.key || ''] = {
     scrollX: window.pageXOffset,
     scrollY: window.pageYOffset,
   };
   // Delete stored scroll position for next page if any
   if (action === 'PUSH') {
-    delete scrollPositionsHistory[location.key];
+    delete scrollPositionsHistory[location.key || ''];
   }
   currentLocation = location;
 
@@ -90,7 +92,7 @@ async function onLocationChange(location, action) {
           }
 
           const elem = document.getElementById('css');
-          if (elem) elem.parentNode.removeChild(elem);
+          if (elem) elem.parentNode!.removeChild(elem);
           return;
         }
 
@@ -106,7 +108,7 @@ async function onLocationChange(location, action) {
 
         let scrollX = 0;
         let scrollY = 0;
-        const pos = scrollPositionsHistory[location.key];
+        const pos = scrollPositionsHistory[location.key || ''];
         if (pos) {
           scrollX = pos.scrollX;
           scrollY = pos.scrollY;
@@ -155,6 +157,7 @@ onLocationChange(currentLocation);
 // Enable Hot Module Replacement (HMR)
 if (module.hot) {
   module.hot.accept('./router', () => {
+    // @ts-ignore TODO
     if (appInstance && appInstance.updater.isMounted(appInstance)) {
       // Force-update the whole tree, including components that refuse to update
       deepForceUpdate(appInstance);

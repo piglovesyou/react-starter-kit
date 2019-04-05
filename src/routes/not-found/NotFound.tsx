@@ -7,15 +7,17 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
+// @flow
+
+import React, {FunctionComponent} from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './NotFound.css';
 
-interface PropTypes {
-  title: string;
-}
+type PropTypes = {
+  title: string,
+};
 
-const NotFound = (props: PropTypes) => (
+const NotFound: FunctionComponent<PropTypes> = (props) => (
   <div className={s.root}>
     <div className={s.container}>
       <h1>{props.title}</h1>

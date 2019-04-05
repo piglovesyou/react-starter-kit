@@ -7,8 +7,10 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+// @flow
+
 import React from 'react';
-import { graphql, ChildDataProps } from 'react-apollo';
+import {ChildDataProps, graphql} from 'react-apollo';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import newsQuery from './news.graphql';
 import s from './Home.css';
@@ -16,10 +18,10 @@ import { HomeNews } from './__generated__/HomeNews';
 
 // Note: There is a regression from flow-bin@0.89.0
 // which spoils OperationComponent declaration. Be careful.
-type ChildProps = ChildDataProps<{}, HomeNews, {}>;
-const withNews  = graphql<{}, HomeNews, {}, ChildProps>(newsQuery);
+type ChildProps = ChildDataProps<{}, HomeNews>
+const withNews = graphql<{}, HomeNews, {}, ChildProps>(newsQuery);
 
-const Home = withNews((props) => {
+const Home = withNews(props => {
   const {
     data: {
       loading,
@@ -31,11 +33,13 @@ const Home = withNews((props) => {
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <p className={s.networkStatusMessage}>{isConnected ? 'Online' : 'Offline'}</p>
+        <p className={s.networkStatusMessage}>
+          {isConnected ? 'Online' : 'Offline'}
+        </p>
         <h1>React.js News</h1>
-        {loading || !reactjsGetAllNews
+        {loading
           ? 'Loading...'
-          : reactjsGetAllNews.map((item: any) => (
+          : reactjsGetAllNews.map(item => (
               <article key={item.link} className={s.newsItem}>
                 <h1 className={s.newsTitle}>
                   <a href={item.link}>{item.title}</a>

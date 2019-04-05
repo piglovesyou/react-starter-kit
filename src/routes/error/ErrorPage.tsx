@@ -8,17 +8,18 @@
  */
 
 // @flow
+
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import s from './ErrorPage.css';
 
-interface PropTypes {
+type PropTypes = {
   error?: {
-    name: string;
-    message: string;
-    stack: string;
-  };
-}
+    name: string,
+    message: string,
+    stack: string,
+  },
+};
 
 const ErrorPage = ({ error }: PropTypes) => {
   if (__DEV__ && error) {

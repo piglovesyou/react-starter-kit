@@ -28,4 +28,9 @@ declare module "react-test-renderer"
 // declare module "mkdirp"
 // declare module "rimraf"
 
-
+interface Window {
+  ga: any;
+}
+interface NodeModule {
+  hot: any;
+}
