@@ -3,88 +3,109 @@
 exports[`Layout renders children correctly 1`] = `
 <div>
   <div
-    className="root"
+    className="react-notification-root"
   >
     <div
-      className="container"
-    >
-      <div
-        className="root"
-        role="navigation"
-      >
-        <a
-          className="link"
-          href="/about"
-          onClick={[Function]}
-        >
-          About
-        </a>
-        <a
-          className="link"
-          href="/contact"
-          onClick={[Function]}
-        >
-          Contact
-        </a>
-        <span
-          className="spacer"
-        >
-           | 
-        </span>
-        <a
-          className="link"
-          href="/login"
-          onClick={[Function]}
-        >
-          Log in
-        </a>
-        <span
-          className="spacer"
-        >
-          or
-        </span>
-        <a
-          className="link highlight"
-          href="/register"
-          onClick={[Function]}
-        >
-          Sign up
-        </a>
-      </div>
-      <a
-        className="brand"
-        href="/"
-        onClick={[Function]}
-      >
-        <img
-          alt="React"
-          height="38"
-          src="logo-small.png"
-          srcSet="logo-small@2x.png 2x"
-          width="38"
-        />
-        <span
-          className="brandTxt"
-        >
-          Your Company
-        </span>
-      </a>
-      <div
-        className="banner"
-      >
-        <h1
-          className="bannerTitle"
-        >
-          React
-        </h1>
-        <p
-          className="bannerDesc"
-        >
-          Complex web apps made easy
-        </p>
-      </div>
-    </div>
+      className="notification-container-top-left"
+    />
+    <div
+      className="notification-container-top-right"
+    />
+    <div
+      className="notification-container-bottom-left"
+    />
+    <div
+      className="notification-container-bottom-right"
+    />
+    <div
+      className="notification-container-top-center"
+    />
+    <div
+      className="notification-container-bottom-center"
+    />
   </div>
+  <nav
+    className="bg-secondary navbar navbar-expand-md navbar-dark"
+  >
+    <a
+      className="navbar-brand"
+      href="/"
+      onClick={[Function]}
+    >
+      <img
+        alt="React"
+        height="38"
+        src="logo-small.png"
+        srcSet="logo-small@2x.png 2x"
+        width="38"
+      />
+      <span>
+        Your Company
+      </span>
+    </a>
+    <button
+      className="navbar-toggler"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      style={Object {}}
+    >
+      <ul
+        className="ml-auto navbar-nav"
+      >
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/about"
+            onClick={[Function]}
+          >
+            About
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/contact"
+            onClick={[Function]}
+          >
+            Contact
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/login"
+            onClick={[Function]}
+          >
+            Log in
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/register"
+            onClick={[Function]}
+          >
+            Sign up
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
   <div
     className="child"
   />
@@ -92,7 +113,7 @@ exports[`Layout renders children correctly 1`] = `
     className="root"
   >
     <div
-      className="container"
+      className="container container"
     >
       <a
         className="link"
@@ -117,7 +138,7 @@ exports[`Layout renders children correctly 1`] = `
     className="root"
   >
     <div
-      className="container"
+      className="container container"
     >
       <span
         className="text"

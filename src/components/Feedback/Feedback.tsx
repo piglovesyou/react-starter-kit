@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import { Container } from 'reactstrap';
 import useStyles from 'isomorphic-style-loader/useStyles';
 import s from './Feedback.css';
 
@@ -15,7 +16,7 @@ const Feedback = () => {
   useStyles(s);
   return (
     <div className={s.root}>
-      <div className={s.container}>
+      <Container className={s.container}>
         <a
           className={s.link}
           href="https://gitter.im/kriasoft/react-starter-kit"
@@ -29,7 +30,7 @@ const Feedback = () => {
         >
           Report an issue
         </a>
-      </div>
+      </Container>
     </div>
   );
 };

@@ -7,36 +7,47 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
 import useStyles from 'isomorphic-style-loader/useStyles';
-import s from './Header.css';
-import Link from '../Link';
+import React, { useState } from 'react';
+import { Collapse, Navbar, NavbarBrand, NavbarToggler } from 'reactstrap';
+import history from '../../history';
 import Navigation from '../Navigation';
+import s from './Header.css';
 import logoUrl from './logo-small.png';
 import logoUrl2x from './logo-small@2x.png';
 
 const Header = () => {
   useStyles(s);
+  const [isOpen, setOpen] = useState(false);
+
+  const createGotoProps = (path: string) => {
+    return {
+      onClick: (e: any) => {
+        e.preventDefault();
+        setOpen(false);
+        history.push(path);
+      },
+      href: path,
+    };
+  };
+
   return (
-    <div className={s.root}>
-      <div className={s.container}>
-        <Navigation />
-        <Link className={s.brand} to="/">
-          <img
-            src={logoUrl}
-            srcSet={`${logoUrl2x} 2x`}
-            width="38"
-            height="38"
-            alt="React"
-          />
-          <span className={s.brandTxt}>Your Company</span>
-        </Link>
-        <div className={s.banner}>
-          <h1 className={s.bannerTitle}>React</h1>
-          <p className={s.bannerDesc}>Complex web apps made easy</p>
-        </div>
-      </div>
-    </div>
+    <Navbar className="bg-secondary" dark expand="md">
+      <NavbarBrand {...createGotoProps('/')}>
+        <img
+          src={logoUrl}
+          srcSet={`${logoUrl2x} 2x`}
+          width="38"
+          height="38"
+          alt="React"
+        />
+        <span>Your Company</span>
+      </NavbarBrand>
+      <NavbarToggler onClick={() => setOpen(!isOpen)} />
+      <Collapse isOpen={isOpen} navbar>
+        <Navigation createGotoProps={createGotoProps} />
+      </Collapse>
+    </Navbar>
   );
 };
 

@@ -10,7 +10,7 @@
 /* eslint-disable global-require */
 
 const isDebug = !process.argv.includes('--release');
-const pkg = require('../package.json');
+// const pkg = require('../package.json');
 
 const config = {
   // The list of plugins for PostCSS
@@ -36,7 +36,7 @@ const config = {
     // https://github.com/csstools/postcss-preset-env
     require('postcss-preset-env')({
       stage: 3,
-      browsers: pkg.browserslist,
+      // browsers: pkg.browserslist,
       autoprefixer: { flexbox: 'no-2009' },
     }),
     // CSS Nano options http://cssnano.co/

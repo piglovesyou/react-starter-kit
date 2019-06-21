@@ -1,3 +1,13 @@
+# React Starter Kit@piglovesyou [![Build Status](https://travis-ci.org/piglovesyou/react-starter-kit.svg)](https://travis-ci.org/piglovesyou/react-starter-kit) <img align="right" border="1" src="image.png">
+
+This is a customized version of [React Starter Kit](https://github.com/kriasoft/react-starter-kit) with additional features.
+
+- [Apollo](https://www.apollographql.com/) and [TypeScript](https://www.typescriptlang.org/) integration based on [kriasoft/react-starter-kit:feature/apollo-pure](https://github.com/kriasoft/react-starter-kit/tree/feature/apollo-pure) that I maintain
+- [Bootstrap](https://getbootstrap.com/) and its theming support
+- Notification integration using [react-notifications-component](https://github.com/teodosii/react-notifications-component)
+
+---
+
 ## React Starter Kit — "[isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)" web app boilerplate &nbsp; <a href="https://github.com/kriasoft/react-starter-kit/stargazers"><img src="https://img.shields.io/github/stars/kriasoft/react-starter-kit.svg?style=social&label=Star&maxAge=3600" height="20"></a> <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=Follow&maxAge=3600" height="20"></a>
 
 [React Starter Kit](https://www.reactstarterkit.com) is an opinionated boilerplate for web

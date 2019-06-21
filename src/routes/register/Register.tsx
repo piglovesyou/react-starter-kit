@@ -8,23 +8,17 @@
  */
 
 import React from 'react';
-import useStyles from 'isomorphic-style-loader/useStyles';
-import s from './Register.css';
+import { Container } from 'reactstrap';
 
 type PropTypes = {
   title: string;
 };
 
-const Register = (props: PropTypes) => {
-  useStyles(s);
-  return (
-    <div className={s.root}>
-      <div className={s.container}>
-        <h1>{props.title}</h1>
-        <p>...</p>
-      </div>
-    </div>
-  );
-};
+const Register = (props: PropTypes) => (
+  <Container>
+    <h1>{props.title}</h1>
+    <p>...</p>
+  </Container>
+);
 
 export default Register;

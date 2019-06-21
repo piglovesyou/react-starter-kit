@@ -83,7 +83,6 @@ Navigation.propTypes = { items: PropTypes.array.isRequired };
 
 ```scss
 // Navigation.scss
-@import '../variables.scss';
 
 .root {
   width: 300px;

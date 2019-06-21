@@ -9,6 +9,7 @@
 
 import React, { FunctionComponent } from 'react';
 import useStyles from 'isomorphic-style-loader/useStyles';
+import { Container } from 'reactstrap';
 import s from './Footer.css';
 import Link from '../Link';
 
@@ -16,7 +17,7 @@ const Footer: FunctionComponent = () => {
   useStyles(s);
   return (
     <div className={s.root}>
-      <div className={s.container}>
+      <Container className={s.container}>
         <span className={s.text}>© Your Company</span>
         <span className={s.spacer}>·</span>
         <Link className={s.link} to="/">
@@ -34,7 +35,7 @@ const Footer: FunctionComponent = () => {
         <Link className={s.link} to="/not-found">
           Not Found
         </Link>
-      </div>
+      </Container>
     </div>
   );
 };

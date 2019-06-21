@@ -7,31 +7,27 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { ComponentType } from 'react';
-import cx from 'classnames';
-import useStyles from 'isomorphic-style-loader/useStyles';
-import s from './Navigation.css';
-import Link from '../Link';
+import React from 'react';
+import { Nav, NavItem, NavLink } from 'reactstrap';
 
-const Navigation: ComponentType<{}> = () => {
-  useStyles(s);
+const Navigation = (props: { createGotoProps: Function }) => {
+  const { createGotoProps } = props;
+
   return (
-    <div className={s.root} role="navigation">
-      <Link className={s.link} to="/about">
-        About
-      </Link>
-      <Link className={s.link} to="/contact">
-        Contact
-      </Link>
-      <span className={s.spacer}> | </span>
-      <Link className={s.link} to="/login">
-        Log in
-      </Link>
-      <span className={s.spacer}>or</span>
-      <Link className={cx(s.link, s.highlight)} to="/register">
-        Sign up
-      </Link>
-    </div>
+    <Nav className="ml-auto" navbar>
+      <NavItem>
+        <NavLink {...createGotoProps('/about')}>About</NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink {...createGotoProps('/contact')}>Contact</NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink {...createGotoProps('/login')}>Log in</NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink {...createGotoProps('/register')}>Sign up</NavLink>
+      </NavItem>
+    </Nav>
   );
 };
 

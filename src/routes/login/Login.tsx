@@ -8,24 +8,33 @@
  */
 
 import React from 'react';
-import useStyles from 'isomorphic-style-loader/useStyles';
+import withStyles from 'isomorphic-style-loader/withStyles';
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+} from 'reactstrap';
 import s from './Login.css';
 
 type PropTypes = {
   title: string;
 };
 
-const Login = (props: PropTypes) => {
-  useStyles(s);
-  return (
-    <div className={s.root}>
-      <div className={s.container}>
+const Login = (props: PropTypes) => (
+  <Container>
+    <Row>
+      <Col sm="12" md={{ size: 6, offset: 3 }}>
         <h1>{props.title}</h1>
-        <p className={s.lead}>
+        <p className="lead">
           Log in with your username or company email address.
         </p>
-        <div className={s.formGroup}>
-          <a className={s.facebook} href="/login/facebook">
+        <FormGroup>
+          <Button className={s.facebook} href="/login/facebook" block>
             <svg
               className={s.icon}
               width="30"
@@ -36,10 +45,10 @@ const Login = (props: PropTypes) => {
               <path d="M22 16l1-5h-5V7c0-1.544.784-2 3-2h2V0h-4c-4.072 0-7 2.435-7 7v4H7v5h5v14h6V16h4z" />
             </svg>
             <span>Log in with Facebook</span>
-          </a>
-        </div>
-        <div className={s.formGroup}>
-          <a className={s.google} href="/login/google">
+          </Button>
+        </FormGroup>
+        <FormGroup>
+          <Button className={s.google} href="/login/google" block>
             <svg
               className={s.icon}
               width="30"
@@ -61,10 +70,10 @@ const Login = (props: PropTypes) => {
               />
             </svg>
             <span>Log in with Google</span>
-          </a>
-        </div>
-        <div className={s.formGroup}>
-          <a className={s.twitter} href="/login/twitter">
+          </Button>
+        </FormGroup>
+        <FormGroup>
+          <Button className={s.twitter} href="/login/twitter" block>
             <svg
               className={s.icon}
               width="30"
@@ -85,42 +94,32 @@ const Login = (props: PropTypes) => {
               />
             </svg>
             <span>Log in with Twitter</span>
-          </a>
-        </div>
+          </Button>
+        </FormGroup>
         <strong className={s.lineThrough}>OR</strong>
-        <form method="post">
-          <div className={s.formGroup}>
-            <label className={s.label} htmlFor="usernameOrEmail">
-              Username or email address:
-              <input
-                className={s.input}
-                id="usernameOrEmail"
-                type="text"
-                name="usernameOrEmail"
-                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-              />
-            </label>
-          </div>
-          <div className={s.formGroup}>
-            <label className={s.label} htmlFor="password">
-              Password:
-              <input
-                className={s.input}
-                id="password"
-                type="password"
-                name="password"
-              />
-            </label>
-          </div>
-          <div className={s.formGroup}>
-            <button className={s.button} type="submit">
+        <Form method="post">
+          <FormGroup>
+            <Label for="usernameOrEmail">Username or email address:</Label>
+            <Input
+              id="usernameOrEmail"
+              type="text"
+              name="usernameOrEmail"
+              autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label For="password">Password:</Label>
+            <Input id="password" type="password" name="password" />
+          </FormGroup>
+          <FormGroup>
+            <Button color="primary" type="submit" block>
               Log in
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-};
+            </Button>
+          </FormGroup>
+        </Form>
+      </Col>
+    </Row>
+  </Container>
+);
 
-export default Login;
+export default withStyles(s)(Login);

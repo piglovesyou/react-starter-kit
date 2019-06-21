@@ -7,15 +7,16 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
 import useStyles from 'isomorphic-style-loader/useStyles';
-import s from './Home.css';
+import React from 'react';
+import { Container } from 'reactstrap';
 import { withHomeNews } from '../../__generated__/dataBinders';
+import { useNotif } from '../../components/Notification';
+import s from './Home.css';
 
-type Props = {};
-
-const Home = withHomeNews<Props>()(props => {
+const Home = withHomeNews<{}>()(props => {
   useStyles(s);
+  const { addNotification } = useNotif();
 
   const {
     loading,
@@ -24,28 +25,38 @@ const Home = withHomeNews<Props>()(props => {
   } = props.data!;
 
   return (
-    <div className={s.root}>
-      <div className={s.container}>
-        <p className={s.networkStatusMessage}>
-          {isConnected ? 'Online' : 'Offline'}
-        </p>
-        <h1>React.js News</h1>
-        {loading || !reactjsGetAllNews
-          ? 'Loading...'
-          : reactjsGetAllNews.map(item => (
-              <article key={item.link} className={s.newsItem}>
-                <h1 className={s.newsTitle}>
-                  <a href={item.link}>{item.title}</a>
-                </h1>
-                <div
-                  className={s.newsDesc}
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{ __html: item.content }}
-                />
-              </article>
-            ))}
-      </div>
-    </div>
+    <Container>
+      <p className={s.networkStatusMessage}>
+        <button
+          type="button"
+          onClick={() =>
+            addNotification({
+              title: 'My Noitfiaction',
+              message: 'Notification from Home.js',
+              type: Math.random() < 0.5 ? 'success' : 'danger',
+            })
+          }
+        >
+          Notification
+        </button>{' '}
+        {isConnected ? 'Online' : 'Offline'}
+      </p>
+      <h1>React.js News</h1>
+      {loading || !reactjsGetAllNews
+        ? 'Loading...'
+        : reactjsGetAllNews.map(item => (
+            <article key={item.link} className={s.newsItem}>
+              <h1 className={s.newsTitle}>
+                <a href={item.link}>{item.title}</a>
+              </h1>
+              <div
+                className={s.newsDesc}
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: item.content }}
+              />
+            </article>
+          ))}
+    </Container>
   );
 });
 

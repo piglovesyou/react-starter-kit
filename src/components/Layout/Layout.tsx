@@ -7,22 +7,23 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { FunctionComponent } from 'react';
+import animateStyle from 'animate.css';
 import useStyles from 'isomorphic-style-loader/useStyles';
-
-// external-global styles must be imported in your JS.
-import normalizeCss from 'normalize.css';
-import s from './Layout.css';
-import Header from '../Header';
+import React, { FunctionComponent } from 'react';
+import ReactNotification from 'react-notifications-component';
+import theme from '!isomorphic-style-loader!css-loader?modules=global!sass-loader!../theme.scss'; // eslint-disable-line import/no-unresolved
 import Feedback from '../Feedback';
 import Footer from '../Footer';
+import Header from '../Header';
+import { notifStyles, useNotif } from '../Notification';
+import s from './Layout.css';
 
-interface PropTypes {}
-
-const Layout: FunctionComponent<PropTypes> = ({ children }) => {
-  useStyles(normalizeCss, s);
+const Layout: FunctionComponent<{}> = ({ children }) => {
+  useStyles(theme, animateStyle, ...notifStyles, s);
+  const { notifContainerRef } = useNotif();
   return (
     <div>
+      <ReactNotification ref={notifContainerRef} />
       <Header />
       {children}
       <Feedback />
