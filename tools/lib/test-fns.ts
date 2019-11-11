@@ -6,14 +6,19 @@ import i from 'log-symbols';
 import waitOn from 'wait-on';
 
 export const DEFAULT_TITLE = 'React Starter Kit - www.reactstarterkit.com';
-export const TIEMOUT_BASE = 3 * 60 * 1000;
+export const TIEMOUT_BASE = 60 * 1000;
 
-export const success = (...args: string[]) =>
-  console.info('\n', i.success, ...args);
-export const info = (...args: string[]) => console.info('\n', i.info, ...args);
+export function success(...args: string[]) {
+  return console.info('\n', i.success, ...args);
+}
 
-export const execa = (command: string, args: string[], opts?: _execa.Options) =>
-  _execa(command, args, { stdout: process.stdout, ...opts });
+export function info(...args: string[]) {
+  return console.info('\n', i.info, ...args);
+}
+
+export function execa(command: string, args: string[], opts?: _execa.Options) {
+  return _execa(command, args, { stdout: process.stdout, ...opts });
+}
 
 export async function verifyTitle(url: string, expected: string) {
   const text = await fetch(url).then(r => r.text());
@@ -31,7 +36,7 @@ export async function waitApp(url: string) {
   });
 }
 
-export const killApp = async (app: _execa.ExecaChildProcess) => {
+export async function killApp(app: _execa.ExecaChildProcess) {
   info(`Terminating app ${app.pid}...`);
   await new Promise((resolve, reject) => {
     terminate(app.pid, (err?: any) => {
@@ -40,4 +45,4 @@ export const killApp = async (app: _execa.ExecaChildProcess) => {
     });
   });
   success(`App ${app.pid} was terminated`);
-};
+}

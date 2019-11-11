@@ -35,9 +35,9 @@ describe('yarn start', () => {
     async () => {
       // TODO: Abort when any of files is changed
 
-      const relPath = 'src/routes/index.tsx';
+      const sourcePath = 'src/routes/index.tsx';
       const cwd = path.resolve(__dirname, '..');
-      const file = path.join(cwd, relPath);
+      const file = path.join(cwd, sourcePath);
 
       const modifyTitle = async () => {
         const content = await readFile(file);
@@ -47,7 +47,7 @@ describe('yarn start', () => {
         );
       };
 
-      const resetTitle = () => execa('git', ['checkout', relPath], { cwd });
+      const resetTitle = () => execa('git', ['checkout', sourcePath], { cwd });
 
       const port = 3033;
       const url = `http://localhost:${port}`;
