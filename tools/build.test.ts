@@ -21,7 +21,7 @@ describe('yarn build', () => {
       const port = 3033;
       const url = `http://localhost:${port}`;
       const cwd = path.resolve(__dirname, '..');
-      execa('yarn', ['build', '--release'], { cwd });
+      await execa('yarn', ['build', '--release'], { cwd });
       const app = startApp(cwd, port);
       await waitApp(url);
       await verifyTitle(url, DEFAULT_TITLE);
