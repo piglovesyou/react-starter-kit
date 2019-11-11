@@ -1,5 +1,13 @@
 import path from 'path';
-import { killApp, timeoutBase, verifyApp, execa } from './lib/test-fns';
+import { readFile, writeFile } from './lib/fs';
+import {
+  killApp,
+  TIEMOUT_BASE,
+  execa,
+  DEFAULT_TITLE,
+  waitApp,
+  verifyTitle,
+} from './lib/test-fns';
 
 const startApp = (cwd: string, port: number) =>
   execa('yarn', ['start', '--silent'], {
@@ -12,11 +20,48 @@ describe('yarn start', () => {
     'launches the App',
     async () => {
       const port = 3033;
+      const url = `http://localhost:${port}`;
       const cwd = path.resolve(__dirname, '..');
       const app = startApp(cwd, port);
-      await verifyApp(port);
+      await waitApp(url);
+      await verifyTitle(url, DEFAULT_TITLE);
       await killApp(app);
     },
-    timeoutBase * 2,
+    TIEMOUT_BASE * 2,
+  );
+
+  it(
+    'does Hot Module Reload',
+    async () => {
+      // TODO: Abort when any of files is changed
+
+      const relPath = 'src/routes/index.tsx';
+      const cwd = path.resolve(__dirname, '..');
+      const file = path.join(cwd, relPath);
+
+      const modifyTitle = async () => {
+        const content = await readFile(file);
+        await writeFile(
+          file,
+          content.replace(/www.reactstarterkit.com/g, 'yeah.com'),
+        );
+      };
+
+      const resetTitle = () => execa('git', ['checkout', relPath], { cwd });
+
+      const port = 3033;
+      const url = `http://localhost:${port}`;
+      const app = startApp(cwd, port);
+      await waitApp(url);
+      await modifyTitle();
+      await new Promise(resolve => setTimeout(resolve, 3 * 1000));
+      await verifyTitle(
+        url,
+        DEFAULT_TITLE.replace(/www.reactstarterkit.com/g, 'yeah.com'),
+      );
+      await killApp(app);
+      await resetTitle();
+    },
+    TIEMOUT_BASE * 2,
   );
 });
